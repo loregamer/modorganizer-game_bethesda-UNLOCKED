@@ -215,7 +215,7 @@ QString GameGamebryo::identifyGamePath() const
                         L"Installed Path");
 }
 
-bool GameGamebryo::prepareIni(const QString& exec)
+bool GameGamebryo::prepareIni(const QString&)
 {
   MOBase::IProfile* profile = m_Organizer->profile();
 
@@ -335,7 +335,7 @@ QString GameGamebryo::findInRegistry(HKEY baseKey, LPCWSTR path, LPCWSTR value)
   std::unique_ptr<BYTE[]> buffer =
       getRegValue(baseKey, path, value, RRF_RT_REG_SZ | RRF_NOEXPAND);
 
-  return QString::fromUtf16(reinterpret_cast<const ushort*>(buffer.get()));
+  return QString::fromUtf16(reinterpret_cast<const char16_t*>(buffer.get()));
 }
 
 QString GameGamebryo::getKnownFolderPath(REFKNOWNFOLDERID folderId, bool useDefault)
