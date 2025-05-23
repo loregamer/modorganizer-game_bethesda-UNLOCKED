@@ -78,5 +78,5 @@ void EnderalSEGamePlugins::writePluginList(const MOBase::IPluginList* pluginList
                             "and rename them."));
   }
 
-  file.commitIfDifferent(m_LastSaveHash[filePath]);
+  file->commit();
 }

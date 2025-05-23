@@ -14,9 +14,6 @@ public:
 protected:
   void writePluginList(const MOBase::IPluginList* pluginList,
                        const QString& filePath) override;
-
-private:
-  std::map<QString, QByteArray> m_LastSaveHash;
 };
 
 #endif  // ENDERALSEGAMEPLUGINS_H
