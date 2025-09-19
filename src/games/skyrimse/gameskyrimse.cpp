@@ -39,6 +39,11 @@ void GameSkyrimSE::setVariant(QString variant)
 
 void GameSkyrimSE::checkVariants()
 {
+  // If "Other" variant is already selected, don't override it with automatic detection
+  if (m_GameVariant == "Other") {
+    return;
+  }
+
   QFileInfo gog_dll(m_GamePath + "\\Galaxy64.dll");
   QFileInfo epic_dll(m_GamePath + "\\EOSSDK-Win64-Shipping.dll");
   if (gog_dll.exists())
@@ -256,7 +261,7 @@ QStringList GameSkyrimSE::primaryPlugins() const
 
 QStringList GameSkyrimSE::gameVariants() const
 {
-  return {"Steam", "GOG", "Epic Games"};
+  return {"Steam", "GOG", "Epic Games", "Other"};
 }
 
 QString GameSkyrimSE::gameShortName() const

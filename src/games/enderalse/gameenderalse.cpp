@@ -39,6 +39,11 @@ void GameEnderalSE::setVariant(QString variant)
 
 void GameEnderalSE::checkVariants()
 {
+  // If "Other" variant is already selected, don't override it with automatic detection
+  if (m_GameVariant == "Other") {
+    return;
+  }
+
   QFileInfo gog_dll(m_GamePath + "\\Galaxy64.dll");
   if (gog_dll.exists())
     setVariant("GOG");
@@ -165,6 +170,12 @@ QString GameEnderalSE::getLauncherName() const
 
 bool GameEnderalSE::looksValid(const QDir& folder) const
 {
+  // If "Other" variant is selected, skip file checking to allow users without
+  // the game on supported platforms to launch MO2 and the game
+  if (m_GameVariant == "Other") {
+    return true;
+  }
+
   // we need to check both launcher and binary because the binary also exists for
   // Skyrim SE and the launcher for Enderal LE
   return folder.exists(getLauncherName()) && folder.exists(binaryName());

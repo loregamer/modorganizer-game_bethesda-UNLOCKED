@@ -128,6 +128,12 @@ MOBase::IPluginGame::SortMechanism GameGamebryo::sortMechanism() const
 
 bool GameGamebryo::looksValid(QDir const& path) const
 {
+  // If "Other" variant is selected, skip file checking to allow users without
+  // the game on supported platforms to launch MO2 and the game
+  if (m_GameVariant == "Other") {
+    return true;
+  }
+
   // Check for <prog>.exe for now.
   return path.exists(binaryName());
 }

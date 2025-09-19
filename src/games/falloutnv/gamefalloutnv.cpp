@@ -57,6 +57,11 @@ void GameFalloutNV::setVariant(QString variant)
 
 void GameFalloutNV::checkVariants()
 {
+  // If "Other" variant is already selected, don't override it with automatic detection
+  if (m_GameVariant == "Other") {
+    return;
+  }
+
   QFileInfo gog_dll(m_GamePath + "\\Galaxy.dll");
   QFileInfo epic_dll(m_GamePath + "\\EOSSDK-Win32-Shipping.dll");
   if (gog_dll.exists())
@@ -262,7 +267,7 @@ QStringList GameFalloutNV::primaryPlugins() const
 
 QStringList GameFalloutNV::gameVariants() const
 {
-  return {"Steam", "GOG", "Epic Games"};
+  return {"Steam", "GOG", "Epic Games", "Other"};
 }
 
 QString GameFalloutNV::gameShortName() const

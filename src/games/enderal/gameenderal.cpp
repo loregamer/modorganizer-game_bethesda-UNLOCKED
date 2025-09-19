@@ -140,6 +140,12 @@ void GameEnderal::initializeProfile(const QDir& path, ProfileSettings settings) 
 
 bool GameEnderal::looksValid(QDir const& path) const
 {
+  // If "Other" variant is selected, skip file checking to allow users without
+  // the game on supported platforms to launch MO2 and the game
+  if (m_GameVariant == "Other") {
+    return true;
+  }
+
   // we need to check both launcher and binary because the binary also exists for
   // Skyrim and the launcher for Enderal SE
   return path.exists(getLauncherName()) && path.exists(binaryName());
