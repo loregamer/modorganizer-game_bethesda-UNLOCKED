@@ -59,18 +59,6 @@ GamebryoModDataChecker::GamebryoModDataChecker(const GameGamebryo* game) : m_Gam
 GamebryoModDataChecker::CheckReturn GamebryoModDataChecker::dataLooksValid(
     std::shared_ptr<const MOBase::IFileTree> fileTree) const
 {
-  auto& folders  = possibleFolderNames();
-  auto& suffixes = possibleFileExtensions();
-  for (auto entry : *fileTree) {
-    if (entry->isDir()) {
-      if (folders.count(entry->name()) > 0) {
-        return CheckReturn::VALID;
-      }
-    } else {
-      if (suffixes.count(entry->suffix()) > 0) {
-        return CheckReturn::VALID;
-      }
-    }
-  }
-  return CheckReturn::INVALID;
+  // Always return VALID to disable all game file validation
+  return CheckReturn::VALID;
 }
